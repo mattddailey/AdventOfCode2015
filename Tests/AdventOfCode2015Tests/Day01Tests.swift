@@ -3,13 +3,14 @@ import Testing
 
 struct Day01Tests {
   let sample = """
+  ()())
   """
 
   @Test
   func testParse() async throws {
     let day = Day01()
     let parsed = try await day.parse(sample)
-    #expect(parsed.isEmpty == false)
+    #expect(parsed == Array(sample))
   }
 
   @Test
@@ -17,7 +18,7 @@ struct Day01Tests {
     let day = Day01()
     let parsed = try await day.parse(sample)
     let result = try await day.part1(parsed)
-    #expect(result == "Not implemented")
+    #expect(result == -1)
   }
 
   @Test
@@ -25,6 +26,6 @@ struct Day01Tests {
     let day = Day01()
     let parsed = try await day.parse(sample)
     let result = try await day.part2(parsed)
-    #expect(result == "Not implemented")
+    #expect(result == 5)
   }
 }
