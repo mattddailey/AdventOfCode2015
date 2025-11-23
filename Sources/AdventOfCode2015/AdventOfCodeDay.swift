@@ -2,11 +2,13 @@ import ArgumentParser
 import Foundation
 
 protocol AdventOfCodeDay: AsyncParsableCommand {
+  associatedtype Input
+  
   static var day: Int { get }
 
-  func parse(_ input: String) async throws -> String
-  func part1(_ input: String) async throws -> String
-  func part2(_ input: String) async throws -> String
+  func parse(_ input: String) async throws -> Input
+  func part1(_ input: Input) async throws -> String
+  func part2(_ input: Input) async throws -> String
 }
 
 extension AdventOfCodeDay {
