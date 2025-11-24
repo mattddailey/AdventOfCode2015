@@ -8,36 +8,25 @@ struct Day01: AdventOfCodeDay {
   }
 
   func part1(_ input: [Character]) async throws -> Int {
-    let floor = input.reduce(0) { floor, character in
-      if character == "(" {
-        floor + 1
-      } else if character == ")" {
-        floor - 1
-      } else {
-        floor
-      }
-    }
-    
-    return floor
+    input
+      .map { $0 == "(" ? 1 : -1 }
+      .reduce(0, +)
   }
 
   func part2(_ input: [Character]) async throws -> Int {
     var floor = 0
     
-    for (position, character) in input.enumerated() {
-      floor = if character == "(" {
-        floor + 1
-      } else if character == ")" {
-        floor - 1
-      } else {
-        floor
+    return input
+      .enumerated()
+      .compactMap { index, element in
+        floor += (element == "(" ? 1 : -1)
+        
+        return if floor < 0 {
+          index + 1
+        } else {
+          nil
+        }
       }
-      
-      if floor < 0 {
-        return position + 1
-      }
-    }
-    
-    fatalError("Santa never went into the basement.")
+      .first ?? 0
   }
 }
